@@ -24,3 +24,431 @@ Completed 200 OK in 7ms (Views: 2.9ms | ActiveRecord: 0.0ms | Allocations: 5828)
 
   [1m[35m (0.8ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
   [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20220816072029)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "employee_id" varchar, "name" varchar, "email_id" varchar, "password" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20220816072029"]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateCustomers (20220816072259)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "customers" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "age" integer, "email_id" varchar, "phone_no" integer, "sex" varchar, "address" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20220816072259"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateProducts (20220816072523)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "products" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "batch" varchar, "type" varchar, "brand" varchar, "price" float, "stock" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20220816072523"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreatePurchases (20220816073512)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "purchases" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "customer_id" integer NOT NULL, "product_id" integer NOT NULL, "quantity" integer, "date_and_time" datetime(6), "status" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_a7331befc1"
+FOREIGN KEY ("customer_id")
+  REFERENCES "customers" ("id")
+, CONSTRAINT "fk_rails_0d630f0bc7"
+FOREIGN KEY ("product_id")
+  REFERENCES "products" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_purchases_on_customer_id" ON "purchases" ("customer_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_purchases_on_product_id" ON "purchases" ("product_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20220816073512"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2022-08-16 07:45:23.861619"], ["updated_at", "2022-08-16 07:45:23.861619"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/api/v1/customers" for 127.0.0.1 at 2022-08-16 14:08:17 +0530
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+
+SyntaxError - syntax error, unexpected `elsif', expecting `end'
+            elsif param[0] == :sex
+            ^~~~~
+/Users/tnluser/Workspace/Hackathon/market-app/super_market/app/controllers/api/v1/customers_controller.rb:22: syntax error, unexpected `end', expecting end-of-input
+    end
+    ^~~:
+  app/controllers/api/v1/customers_controller.rb:15:in `'
+
+Started GET "/api/v1/customers" for 127.0.0.1 at 2022-08-16 14:08:37 +0530
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::V1::CustomersController#getCustomers as */*
+  Parameters: {"customer"=>{}}
+  [1m[36mCustomer Load (0.1ms)[0m  [1m[34mSELECT "customers".* FROM "customers"[0m
+  ↳ app/controllers/api/v1/customers_controller.rb:20:in `getCustomers'
+Completed 200 OK in 6ms (Views: 0.7ms | ActiveRecord: 0.5ms | Allocations: 4003)
+
+
+Started GET "/api/v1/customers/?email_id=ashirbad.behera&id=1200" for 127.0.0.1 at 2022-08-16 14:09:33 +0530
+Processing by Api::V1::CustomersController#getCustomers as */*
+  Parameters: {"email_id"=>"ashirbad.behera", "id"=>"1200", "customer"=>{}}
+  [1m[36mCustomer Load (0.1ms)[0m  [1m[34mSELECT "customers".* FROM "customers" WHERE "customers"."email_id" = ? AND "customers"."id" = ?[0m  [["email_id", "ashirbad.behera"], ["id", 1200]]
+  ↳ app/controllers/api/v1/customers_controller.rb:20:in `getCustomers'
+Completed 200 OK in 10ms (Views: 8.3ms | ActiveRecord: 0.1ms | Allocations: 6158)
+
+
+Started GET "/api/v1/customers/?email_id=ashirbad.behera&id=1200" for 127.0.0.1 at 2022-08-16 14:32:13 +0530
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::V1::CustomersController#getCustomers as */*
+  Parameters: {"email_id"=>"ashirbad.behera", "id"=>"1200", "customer"=>{}}
+  [1m[36mCustomer Load (0.1ms)[0m  [1m[34mSELECT "customers".* FROM "customers" WHERE "customers"."email_id" = ? AND "customers"."id" = ?[0m  [["email_id", "ashirbad.behera"], ["id", 1200]]
+  ↳ app/controllers/api/v1/customers_controller.rb:24:in `getCustomers'
+Completed 200 OK in 5ms (Views: 1.6ms | ActiveRecord: 0.3ms | Allocations: 4850)
+
+
+Started GET "/api/v1/customers/?email_id=ashirbad.behera&id=1200" for 127.0.0.1 at 2022-08-16 14:34:50 +0530
+Processing by Api::V1::CustomersController#getCustomers as */*
+  Parameters: {"id"=>"1200", "name"=>"Ashirbad Behera", "age"=>22, "email_id"=>"ashirbad.behera", "phone_no"=>6370045207, "sex"=>"male", "address"=>"street 1, city z, state x, india", "customer"=>{"id"=>"1200", "name"=>"Ashirbad Behera", "age"=>22, "email_id"=>"ashirbad.behera", "phone_no"=>6370045207, "sex"=>"male", "address"=>"street 1, city z, state x, india"}}
+  [1m[36mCustomer Load (0.1ms)[0m  [1m[34mSELECT "customers".* FROM "customers" WHERE "customers"."email_id" = ? AND "customers"."id" = ?[0m  [["email_id", "ashirbad.behera"], ["id", 1200]]
+  ↳ app/controllers/api/v1/customers_controller.rb:24:in `getCustomers'
+Completed 200 OK in 2ms (Views: 0.8ms | ActiveRecord: 0.1ms | Allocations: 841)
+
+
+Started POST "/api/v1/customers/?email_id=ashirbad.behera&id=1200" for 127.0.0.1 at 2022-08-16 14:34:55 +0530
+Processing by Api::V1::CustomersController#addCustomer as */*
+  Parameters: {"id"=>"1200", "name"=>"Ashirbad Behera", "age"=>22, "email_id"=>"ashirbad.behera", "phone_no"=>6370045207, "sex"=>"male", "address"=>"street 1, city z, state x, india", "customer"=>{"id"=>"1200", "name"=>"Ashirbad Behera", "age"=>22, "email_id"=>"ashirbad.behera", "phone_no"=>6370045207, "sex"=>"male", "address"=>"street 1, city z, state x, india"}}
+Can't verify CSRF token authenticity.
+Completed 422 Unprocessable Entity in 0ms (ActiveRecord: 0.0ms | Allocations: 492)
+
+
+
+ActionController::InvalidAuthenticityToken - Can't verify CSRF token authenticity.:
+
+Started POST "/api/v1/customers/" for 127.0.0.1 at 2022-08-16 14:36:04 +0530
+Processing by Api::V1::CustomersController#addCustomer as */*
+  Parameters: {"id"=>6370045207, "name"=>"Ashirbad Behera", "age"=>22, "email_id"=>"ashirbad@email.com", "phone_no"=>6370045207, "sex"=>"male", "address"=>"street 1, city z, state x, india", "customer"=>{"id"=>6370045207, "name"=>"Ashirbad Behera", "age"=>22, "email_id"=>"ashirbad@email.com", "phone_no"=>6370045207, "sex"=>"male", "address"=>"street 1, city z, state x, india"}}
+Can't verify CSRF token authenticity.
+Completed 422 Unprocessable Entity in 1ms (ActiveRecord: 0.0ms | Allocations: 444)
+
+
+
+ActionController::InvalidAuthenticityToken - Can't verify CSRF token authenticity.:
+
+Started POST "/api/v1/customers/" for 127.0.0.1 at 2022-08-16 14:40:52 +0530
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::V1::CustomersController#addCustomer as */*
+  Parameters: {"id"=>6370045207, "name"=>"Ashirbad Behera", "age"=>22, "email_id"=>"ashirbad@email.com", "phone_no"=>6370045207, "sex"=>"male", "address"=>"street 1, city z, state x, india", "customer"=>{"id"=>6370045207, "name"=>"Ashirbad Behera", "age"=>22, "email_id"=>"ashirbad@email.com", "phone_no"=>6370045207, "sex"=>"male", "address"=>"street 1, city z, state x, india"}}
+Can't verify CSRF token authenticity.
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.3ms | Allocations: 8594)
+
+
+
+ActiveModel::UnknownAttributeError - unknown attribute 'addess' for Customer.:
+  app/controllers/api/v1/customers_controller.rb:32:in `addCustomer'
+
+Started POST "/api/v1/customers/" for 127.0.0.1 at 2022-08-16 14:44:14 +0530
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::V1::CustomersController#addCustomer as */*
+  Parameters: {"id"=>6370045207, "name"=>"Ashirbad Behera", "age"=>22, "email_id"=>"ashirbad@email.com", "phone_no"=>6370045207, "sex"=>"male", "address"=>"street 1, city z, state x, india", "customer"=>{"id"=>6370045207, "name"=>"Ashirbad Behera", "age"=>22, "email_id"=>"ashirbad@email.com", "phone_no"=>6370045207, "sex"=>"male", "address"=>"street 1, city z, state x, india"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/customers_controller.rb:32:in `addCustomer'
+  [1m[36mCustomer Create (0.3ms)[0m  [1m[32mINSERT INTO "customers" ("id", "name", "age", "email_id", "phone_no", "sex", "address", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["id", 6370045207], ["name", "Ashirbad Behera"], ["age", 22], ["email_id", "ashirbad@email.com"], ["phone_no", 6370045207], ["sex", "male"], ["address", "street 1, city z, state x, india"], ["created_at", "2022-08-16 09:14:14.974140"], ["updated_at", "2022-08-16 09:14:14.974140"]]
+  ↳ app/controllers/api/v1/customers_controller.rb:32:in `addCustomer'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/customers_controller.rb:32:in `addCustomer'
+Completed 200 OK in 4ms (Views: 0.2ms | ActiveRecord: 1.3ms | Allocations: 4891)
+
+
+Started GET "/api/v1/customers/" for 127.0.0.1 at 2022-08-16 14:44:20 +0530
+Processing by Api::V1::CustomersController#getCustomers as */*
+  Parameters: {"id"=>6370045207, "name"=>"Ashirbad Behera", "age"=>22, "email_id"=>"ashirbad@email.com", "phone_no"=>6370045207, "sex"=>"male", "address"=>"street 1, city z, state x, india", "customer"=>{"id"=>6370045207, "name"=>"Ashirbad Behera", "age"=>22, "email_id"=>"ashirbad@email.com", "phone_no"=>6370045207, "sex"=>"male", "address"=>"street 1, city z, state x, india"}}
+  [1m[36mCustomer Load (0.3ms)[0m  [1m[34mSELECT "customers".* FROM "customers"[0m
+  ↳ app/controllers/api/v1/customers_controller.rb:24:in `getCustomers'
+Completed 200 OK in 5ms (Views: 3.8ms | ActiveRecord: 0.3ms | Allocations: 1165)
+
+
+Started POST "/api/v1/customers/" for 127.0.0.1 at 2022-08-16 14:45:21 +0530
+Processing by Api::V1::CustomersController#addCustomer as */*
+  Parameters: {"id"=>8249861028, "name"=>"Sudarsan Behera", "age"=>55, "email_id"=>"sudarsan@email.com", "phone_no"=>8249861028, "sex"=>"male", "address"=>"street 1, city z, state x, india", "customer"=>{"id"=>8249861028, "name"=>"Sudarsan Behera", "age"=>55, "email_id"=>"sudarsan@email.com", "phone_no"=>8249861028, "sex"=>"male", "address"=>"street 1, city z, state x, india"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/customers_controller.rb:32:in `addCustomer'
+  [1m[36mCustomer Create (1.9ms)[0m  [1m[32mINSERT INTO "customers" ("id", "name", "age", "email_id", "phone_no", "sex", "address", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["id", 8249861028], ["name", "Sudarsan Behera"], ["age", 55], ["email_id", "sudarsan@email.com"], ["phone_no", 8249861028], ["sex", "male"], ["address", "street 1, city z, state x, india"], ["created_at", "2022-08-16 09:15:21.503096"], ["updated_at", "2022-08-16 09:15:21.503096"]]
+  ↳ app/controllers/api/v1/customers_controller.rb:32:in `addCustomer'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/customers_controller.rb:32:in `addCustomer'
+Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 2.5ms | Allocations: 1991)
+
+
+Started GET "/api/v1/customers/" for 127.0.0.1 at 2022-08-16 14:45:25 +0530
+Processing by Api::V1::CustomersController#getCustomers as */*
+  Parameters: {"id"=>8249861028, "name"=>"Sudarsan Behera", "age"=>55, "email_id"=>"sudarsan@email.com", "phone_no"=>8249861028, "sex"=>"male", "address"=>"street 1, city z, state x, india", "customer"=>{"id"=>8249861028, "name"=>"Sudarsan Behera", "age"=>55, "email_id"=>"sudarsan@email.com", "phone_no"=>8249861028, "sex"=>"male", "address"=>"street 1, city z, state x, india"}}
+  [1m[36mCustomer Load (0.5ms)[0m  [1m[34mSELECT "customers".* FROM "customers"[0m
+  ↳ app/controllers/api/v1/customers_controller.rb:24:in `getCustomers'
+Completed 200 OK in 6ms (Views: 4.4ms | ActiveRecord: 0.5ms | Allocations: 1063)
+
+
+Started PATCH "/api/v1/customers/" for 127.0.0.1 at 2022-08-16 14:45:55 +0530
+Processing by Api::V1::CustomersController#editCustomer as */*
+  Parameters: {"id"=>8249861028, "data"=>{"age"=>56}, "name"=>"Sudarsan Behera", "age"=>55, "email_id"=>"sudarsan@email.com", "phone_no"=>8249861028, "sex"=>"male", "address"=>"street 1, city z, state x, india", "customer"=>{"id"=>8249861028, "name"=>"Sudarsan Behera", "age"=>55, "email_id"=>"sudarsan@email.com", "phone_no"=>8249861028, "sex"=>"male", "address"=>"street 1, city z, state x, india"}}
+Can't verify CSRF token authenticity.
+  [1m[36mCustomer Load (0.1ms)[0m  [1m[34mSELECT "customers".* FROM "customers" WHERE "customers"."id" = ? LIMIT ?[0m  [["id", 8249861028], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/customers_controller.rb:45:in `editCustomer'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/customers_controller.rb:68:in `block in editCustomer'
+  [1m[36mCustomer Update (0.3ms)[0m  [1m[33mUPDATE "customers" SET "age" = ?, "updated_at" = ? WHERE "customers"."id" = ?[0m  [["age", 56], ["updated_at", "2022-08-16 09:15:55.285628"], ["id", 8249861028]]
+  ↳ app/controllers/api/v1/customers_controller.rb:68:in `block in editCustomer'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/customers_controller.rb:68:in `block in editCustomer'
+Completed 200 OK in 18ms (Views: 0.1ms | ActiveRecord: 1.2ms | Allocations: 7812)
+
+
+Started GET "/api/v1/customers/" for 127.0.0.1 at 2022-08-16 14:45:59 +0530
+Processing by Api::V1::CustomersController#getCustomers as */*
+  Parameters: {"id"=>8249861028, "data"=>{"age"=>56}, "name"=>"Sudarsan Behera", "age"=>55, "email_id"=>"sudarsan@email.com", "phone_no"=>8249861028, "sex"=>"male", "address"=>"street 1, city z, state x, india", "customer"=>{"id"=>8249861028, "name"=>"Sudarsan Behera", "age"=>55, "email_id"=>"sudarsan@email.com", "phone_no"=>8249861028, "sex"=>"male", "address"=>"street 1, city z, state x, india"}}
+  [1m[36mCustomer Load (0.2ms)[0m  [1m[34mSELECT "customers".* FROM "customers"[0m
+  ↳ app/controllers/api/v1/customers_controller.rb:24:in `getCustomers'
+Completed 200 OK in 4ms (Views: 3.4ms | ActiveRecord: 0.2ms | Allocations: 1063)
+
+
+Started DELETE "/api/v1/customers/" for 127.0.0.1 at 2022-08-16 14:46:05 +0530
+Processing by Api::V1::CustomersController#deleteCustomer as */*
+  Parameters: {"id"=>8249861028, "data"=>{"age"=>56}, "name"=>"Sudarsan Behera", "age"=>55, "email_id"=>"sudarsan@email.com", "phone_no"=>8249861028, "sex"=>"male", "address"=>"street 1, city z, state x, india", "customer"=>{"id"=>8249861028, "name"=>"Sudarsan Behera", "age"=>55, "email_id"=>"sudarsan@email.com", "phone_no"=>8249861028, "sex"=>"male", "address"=>"street 1, city z, state x, india"}}
+Can't verify CSRF token authenticity.
+  [1m[36mCustomer Load (0.2ms)[0m  [1m[34mSELECT "customers".* FROM "customers" WHERE "customers"."id" = ? LIMIT ?[0m  [["id", 8249861028], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/customers_controller.rb:39:in `deleteCustomer'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/customers_controller.rb:40:in `deleteCustomer'
+  [1m[36mCustomer Destroy (0.3ms)[0m  [1m[31mDELETE FROM "customers" WHERE "customers"."id" = ?[0m  [["id", 8249861028]]
+  ↳ app/controllers/api/v1/customers_controller.rb:40:in `deleteCustomer'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/customers_controller.rb:40:in `deleteCustomer'
+Completed 200 OK in 5ms (Views: 0.1ms | ActiveRecord: 1.3ms | Allocations: 2123)
+
+
+Started GET "/api/v1/customers/" for 127.0.0.1 at 2022-08-16 14:46:10 +0530
+Processing by Api::V1::CustomersController#getCustomers as */*
+  Parameters: {"id"=>8249861028, "data"=>{"age"=>56}, "name"=>"Sudarsan Behera", "age"=>55, "email_id"=>"sudarsan@email.com", "phone_no"=>8249861028, "sex"=>"male", "address"=>"street 1, city z, state x, india", "customer"=>{"id"=>8249861028, "name"=>"Sudarsan Behera", "age"=>55, "email_id"=>"sudarsan@email.com", "phone_no"=>8249861028, "sex"=>"male", "address"=>"street 1, city z, state x, india"}}
+  [1m[36mCustomer Load (0.2ms)[0m  [1m[34mSELECT "customers".* FROM "customers"[0m
+  ↳ app/controllers/api/v1/customers_controller.rb:24:in `getCustomers'
+Completed 200 OK in 4ms (Views: 2.4ms | ActiveRecord: 0.2ms | Allocations: 917)
+
+
+Started GET "/api/v1/customers/?id=6370045207" for 127.0.0.1 at 2022-08-16 14:46:26 +0530
+Processing by Api::V1::CustomersController#getCustomers as */*
+  Parameters: {"id"=>"6370045207", "data"=>{"age"=>56}, "name"=>"Sudarsan Behera", "age"=>55, "email_id"=>"sudarsan@email.com", "phone_no"=>8249861028, "sex"=>"male", "address"=>"street 1, city z, state x, india", "customer"=>{"id"=>"6370045207", "name"=>"Sudarsan Behera", "age"=>55, "email_id"=>"sudarsan@email.com", "phone_no"=>8249861028, "sex"=>"male", "address"=>"street 1, city z, state x, india"}}
+  [1m[36mCustomer Load (0.7ms)[0m  [1m[34mSELECT "customers".* FROM "customers" WHERE "customers"."id" = ?[0m  [["id", 6370045207]]
+  ↳ app/controllers/api/v1/customers_controller.rb:24:in `getCustomers'
+Completed 200 OK in 4ms (Views: 2.3ms | ActiveRecord: 0.7ms | Allocations: 1022)
+
+
+Started GET "/api/v1/customers/?id=637004520" for 127.0.0.1 at 2022-08-16 14:46:31 +0530
+Processing by Api::V1::CustomersController#getCustomers as */*
+  Parameters: {"id"=>"637004520", "data"=>{"age"=>56}, "name"=>"Sudarsan Behera", "age"=>55, "email_id"=>"sudarsan@email.com", "phone_no"=>8249861028, "sex"=>"male", "address"=>"street 1, city z, state x, india", "customer"=>{"id"=>"637004520", "name"=>"Sudarsan Behera", "age"=>55, "email_id"=>"sudarsan@email.com", "phone_no"=>8249861028, "sex"=>"male", "address"=>"street 1, city z, state x, india"}}
+  [1m[36mCustomer Load (0.2ms)[0m  [1m[34mSELECT "customers".* FROM "customers" WHERE "customers"."id" = ?[0m  [["id", 637004520]]
+  ↳ app/controllers/api/v1/customers_controller.rb:24:in `getCustomers'
+Completed 200 OK in 6ms (Views: 4.5ms | ActiveRecord: 0.2ms | Allocations: 803)
+
+
+Started POST "/api/v1/customers/?id=637004520" for 127.0.0.1 at 2022-08-16 15:17:03 +0530
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+
+ArgumentError - The provided regular expression is using multiline anchors (^ or $), which may present a security risk. Did you mean to use \A and \z, or forgot to add the :multiline => true option?:
+  app/models/customer.rb:9:in `<class:Customer>'
+  app/models/customer.rb:1:in `<main>'
+
+Started POST "/api/v1/customers/?id=637004520" for 127.0.0.1 at 2022-08-16 15:29:24 +0530
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::V1::CustomersController#addCustomer as */*
+  Parameters: {"id"=>"637004520", "name"=>"Sudarsan Behera", "age"=>56, "email_id"=>"sudarsan@email.com", "phone_no"=>9861807539, "sex"=>"male", "address"=>"street 1, city z, state x, india", "customer"=>{"id"=>"637004520", "name"=>"Sudarsan Behera", "age"=>56, "email_id"=>"sudarsan@email.com", "phone_no"=>9861807539, "sex"=>"male", "address"=>"street 1, city z, state x, india"}}
+Can't verify CSRF token authenticity.
+Completed 422 Unprocessable Entity in 13ms (ActiveRecord: 0.5ms | Allocations: 12592)
+
+
+
+ActiveRecord::RecordInvalid - Validation failed: Address is invalid:
+  app/controllers/api/v1/customers_controller.rb:32:in `addCustomer'
+
+Started POST "/api/v1/customers/?id=637004520" for 127.0.0.1 at 2022-08-16 15:36:05 +0530
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::V1::CustomersController#addCustomer as */*
+  Parameters: {"id"=>"637004520", "name"=>"Sudarsan Behera", "age"=>56, "email_id"=>"sudarsan@email.com", "phone_no"=>9861807539, "sex"=>"male", "address"=>"street 1, city z, state x, india", "customer"=>{"id"=>"637004520", "name"=>"Sudarsan Behera", "age"=>56, "email_id"=>"sudarsan@email.com", "phone_no"=>9861807539, "sex"=>"male", "address"=>"street 1, city z, state x, india"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/customers_controller.rb:32:in `addCustomer'
+  [1m[36mCustomer Create (0.3ms)[0m  [1m[32mINSERT INTO "customers" ("id", "name", "age", "email_id", "phone_no", "sex", "address", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["id", 637004520], ["name", "Sudarsan Behera"], ["age", 56], ["email_id", "sudarsan@email.com"], ["phone_no", 9861807539], ["sex", "male"], ["address", "street 1, city z, state x, india"], ["created_at", "2022-08-16 10:06:05.561917"], ["updated_at", "2022-08-16 10:06:05.561917"]]
+  ↳ app/controllers/api/v1/customers_controller.rb:32:in `addCustomer'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/customers_controller.rb:32:in `addCustomer'
+Completed 200 OK in 5ms (Views: 0.2ms | ActiveRecord: 1.2ms | Allocations: 4983)
+
+
+Started POST "/api/v1/customers/?id=637004520" for 127.0.0.1 at 2022-08-16 15:36:49 +0530
+Processing by Api::V1::CustomersController#addCustomer as */*
+  Parameters: {"id"=>"637004520", "name"=>"Sudarsan Behera", "age"=>56, "email_id"=>"sudarsan@email.com", "phone_no"=>9861807539, "sex"=>"male", "address"=>"street 1, city z, state x, india", "customer"=>{"id"=>"637004520", "name"=>"Sudarsan Behera", "age"=>56, "email_id"=>"sudarsan@email.com", "phone_no"=>9861807539, "sex"=>"male", "address"=>"street 1, city z, state x, india"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/customers_controller.rb:32:in `addCustomer'
+  [1m[36mCustomer Create (0.6ms)[0m  [1m[32mINSERT INTO "customers" ("id", "name", "age", "email_id", "phone_no", "sex", "address", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["id", 637004520], ["name", "Sudarsan Behera"], ["age", 56], ["email_id", "sudarsan@email.com"], ["phone_no", 9861807539], ["sex", "male"], ["address", "street 1, city z, state x, india"], ["created_at", "2022-08-16 10:06:49.780973"], ["updated_at", "2022-08-16 10:06:49.780973"]]
+  ↳ app/controllers/api/v1/customers_controller.rb:32:in `addCustomer'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/api/v1/customers_controller.rb:32:in `addCustomer'
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 0.8ms | Allocations: 3042)
+
+
+
+ActiveRecord::RecordNotUnique - SQLite3::ConstraintException: UNIQUE constraint failed: customers.id:
+  app/controllers/api/v1/customers_controller.rb:32:in `addCustomer'
+
+Started POST "/api/v1/customers/?id=637004520" for 127.0.0.1 at 2022-08-16 15:37:20 +0530
+Processing by Api::V1::CustomersController#addCustomer as */*
+  Parameters: {"id"=>"637004520", "name"=>"Sudarsan B_ehera", "age"=>56, "email_id"=>"sudarsan@email.com", "phone_no"=>9861807539, "sex"=>"male", "address"=>"street 1, city z, state x, india", "customer"=>{"id"=>"637004520", "name"=>"Sudarsan B_ehera", "age"=>56, "email_id"=>"sudarsan@email.com", "phone_no"=>9861807539, "sex"=>"male", "address"=>"street 1, city z, state x, india"}}
+Can't verify CSRF token authenticity.
+Completed 422 Unprocessable Entity in 5ms (ActiveRecord: 0.0ms | Allocations: 1444)
+
+
+
+ActiveRecord::RecordInvalid - Validation failed: Name Enter a valid name, Name name must be 2 to 15 characters long:
+  app/controllers/api/v1/customers_controller.rb:32:in `addCustomer'
+
+Started POST "/api/v1/customers/?id=637004520" for 127.0.0.1 at 2022-08-16 15:40:26 +0530
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::V1::CustomersController#addCustomer as */*
+  Parameters: {"id"=>"637004520", "name"=>"Sudarsan B_ehera", "age"=>56, "email_id"=>"sudarsan@email.com", "phone_no"=>9861807539, "sex"=>"male", "address"=>"street 1, city z, state x, india", "customer"=>{"id"=>"637004520", "name"=>"Sudarsan B_ehera", "age"=>56, "email_id"=>"sudarsan@email.com", "phone_no"=>9861807539, "sex"=>"male", "address"=>"street 1, city z, state x, india"}}
+Can't verify CSRF token authenticity.
+Completed 422 Unprocessable Entity in 2ms (ActiveRecord: 0.4ms | Allocations: 3157)
+
+
+
+ActiveRecord::RecordInvalid - Validation failed: Name Enter a valid name:
+  app/controllers/api/v1/customers_controller.rb:32:in `addCustomer'
+
+Started POST "/api/v1/customers/?id=637004520" for 127.0.0.1 at 2022-08-16 15:40:38 +0530
+Processing by Api::V1::CustomersController#addCustomer as */*
+  Parameters: {"id"=>"637004520", "name"=>"Sudarsan Behera", "age"=>56, "email_id"=>"suda&rsan@email.com", "phone_no"=>9861807539, "sex"=>"male", "address"=>"street 1, city z, state x, india", "customer"=>{"id"=>"637004520", "name"=>"Sudarsan Behera", "age"=>56, "email_id"=>"suda&rsan@email.com", "phone_no"=>9861807539, "sex"=>"male", "address"=>"street 1, city z, state x, india"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/customers_controller.rb:32:in `addCustomer'
+  [1m[36mCustomer Create (0.3ms)[0m  [1m[32mINSERT INTO "customers" ("id", "name", "age", "email_id", "phone_no", "sex", "address", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["id", 637004520], ["name", "Sudarsan Behera"], ["age", 56], ["email_id", "suda&rsan@email.com"], ["phone_no", 9861807539], ["sex", "male"], ["address", "street 1, city z, state x, india"], ["created_at", "2022-08-16 10:10:38.898747"], ["updated_at", "2022-08-16 10:10:38.898747"]]
+  ↳ app/controllers/api/v1/customers_controller.rb:32:in `addCustomer'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/api/v1/customers_controller.rb:32:in `addCustomer'
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.4ms | Allocations: 3076)
+
+
+
+ActiveRecord::RecordNotUnique - SQLite3::ConstraintException: UNIQUE constraint failed: customers.id:
+  app/controllers/api/v1/customers_controller.rb:32:in `addCustomer'
+
+Started POST "/api/v1/customers/?id=637004520" for 127.0.0.1 at 2022-08-16 15:40:53 +0530
+Processing by Api::V1::CustomersController#addCustomer as */*
+  Parameters: {"id"=>"637004520", "name"=>"Sudarsan Behera", "age"=>56, "email_id"=>"sudarsan@email.", "phone_no"=>9861807539, "sex"=>"male", "address"=>"street 1, city z, state x, india", "customer"=>{"id"=>"637004520", "name"=>"Sudarsan Behera", "age"=>56, "email_id"=>"sudarsan@email.", "phone_no"=>9861807539, "sex"=>"male", "address"=>"street 1, city z, state x, india"}}
+Can't verify CSRF token authenticity.
+Completed 422 Unprocessable Entity in 4ms (ActiveRecord: 0.0ms | Allocations: 1135)
+
+
+
+ActiveRecord::RecordInvalid - Validation failed: Email Enter a valid email address:
+  app/controllers/api/v1/customers_controller.rb:32:in `addCustomer'
+
+Started POST "/api/v1/customers/?id=637004520" for 127.0.0.1 at 2022-08-16 15:41:51 +0530
+Processing by Api::V1::CustomersController#addCustomer as */*
+  Parameters: {"id"=>"637004520", "name"=>"Sudarsan Behera", "age"=>56, "email_id"=>"sudarsan@email.com", "phone_no"=>9861807555539, "sex"=>"male", "address"=>"street 1, city z, state x, india", "customer"=>{"id"=>"637004520", "name"=>"Sudarsan Behera", "age"=>56, "email_id"=>"sudarsan@email.com", "phone_no"=>9861807555539, "sex"=>"male", "address"=>"street 1, city z, state x, india"}}
+Can't verify CSRF token authenticity.
+Completed 422 Unprocessable Entity in 3ms (ActiveRecord: 0.0ms | Allocations: 1145)
+
+
+
+ActiveRecord::RecordInvalid - Validation failed: Phone no phone_no should be 10 digits long:
+  app/controllers/api/v1/customers_controller.rb:32:in `addCustomer'
+
+Started POST "/api/v1/customers/?id=637004520" for 127.0.0.1 at 2022-08-16 15:41:57 +0530
+Processing by Api::V1::CustomersController#addCustomer as */*
+  Parameters: {"id"=>"637004520", "name"=>"Sudarsan Behera", "age"=>56, "email_id"=>"sudarsan@email.com", "phone_no"=>"9861807555539", "sex"=>"male", "address"=>"street 1, city z, state x, india", "customer"=>{"id"=>"637004520", "name"=>"Sudarsan Behera", "age"=>56, "email_id"=>"sudarsan@email.com", "phone_no"=>"9861807555539", "sex"=>"male", "address"=>"street 1, city z, state x, india"}}
+Can't verify CSRF token authenticity.
+Completed 422 Unprocessable Entity in 4ms (ActiveRecord: 0.0ms | Allocations: 1100)
+
+
+
+ActiveRecord::RecordInvalid - Validation failed: Phone no phone_no should be 10 digits long:
+  app/controllers/api/v1/customers_controller.rb:32:in `addCustomer'
+
+Started POST "/api/v1/customers/?id=637004520" for 127.0.0.1 at 2022-08-16 15:42:43 +0530
+Processing by Api::V1::CustomersController#addCustomer as */*
+  Parameters: {"id"=>"637004520", "name"=>"Sudarsan Behera", "age"=>56, "email_id"=>"sudarsan@email.com", "phone_no"=>"9861807539", "sex"=>"male", "address"=>"street 1, city z, state x, india", "customer"=>{"id"=>"637004520", "name"=>"Sudarsan Behera", "age"=>56, "email_id"=>"sudarsan@email.com", "phone_no"=>"9861807539", "sex"=>"male", "address"=>"street 1, city z, state x, india"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/customers_controller.rb:32:in `addCustomer'
+  [1m[36mCustomer Create (0.4ms)[0m  [1m[32mINSERT INTO "customers" ("id", "name", "age", "email_id", "phone_no", "sex", "address", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["id", 637004520], ["name", "Sudarsan Behera"], ["age", 56], ["email_id", "sudarsan@email.com"], ["phone_no", 9861807539], ["sex", "male"], ["address", "street 1, city z, state x, india"], ["created_at", "2022-08-16 10:12:43.082583"], ["updated_at", "2022-08-16 10:12:43.082583"]]
+  ↳ app/controllers/api/v1/customers_controller.rb:32:in `addCustomer'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/api/v1/customers_controller.rb:32:in `addCustomer'
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.5ms | Allocations: 3008)
+
+
+
+ActiveRecord::RecordNotUnique - SQLite3::ConstraintException: UNIQUE constraint failed: customers.id:
+  app/controllers/api/v1/customers_controller.rb:32:in `addCustomer'
+
+Started POST "/api/v1/customers/?id=637004520" for 127.0.0.1 at 2022-08-16 15:45:21 +0530
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::V1::CustomersController#addCustomer as */*
+  Parameters: {"id"=>"637004520", "name"=>"Sudarsan Behera", "age"=>56, "email_id"=>"sudarsan@email.com", "phone_no"=>"9861807539", "sex"=>"male", "address"=>"street 1, city z, state x, india", "customer"=>{"id"=>"637004520", "name"=>"Sudarsan Behera", "age"=>56, "email_id"=>"sudarsan@email.com", "phone_no"=>"9861807539", "sex"=>"male", "address"=>"street 1, city z, state x, india"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/customers_controller.rb:32:in `addCustomer'
+  [1m[36mCustomer Create (0.4ms)[0m  [1m[32mINSERT INTO "customers" ("id", "name", "age", "email_id", "phone_no", "sex", "address", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["id", 637004520], ["name", "Sudarsan Behera"], ["age", 56], ["email_id", "sudarsan@email.com"], ["phone_no", 9861807539], ["sex", "male"], ["address", "street 1, city z, state x, india"], ["created_at", "2022-08-16 10:15:21.180218"], ["updated_at", "2022-08-16 10:15:21.180218"]]
+  ↳ app/controllers/api/v1/customers_controller.rb:32:in `addCustomer'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/api/v1/customers_controller.rb:32:in `addCustomer'
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.9ms | Allocations: 5122)
+
+
+
+ActiveRecord::RecordNotUnique - SQLite3::ConstraintException: UNIQUE constraint failed: customers.id:
+  app/controllers/api/v1/customers_controller.rb:32:in `addCustomer'
+
+Started POST "/api/v1/customers/?id=637004520" for 127.0.0.1 at 2022-08-16 15:45:28 +0530
+Processing by Api::V1::CustomersController#addCustomer as */*
+  Parameters: {"id"=>"637004520", "name"=>"Sudarsan Behera", "age"=>56, "email_id"=>"sudarsan@email.com", "phone_no"=>"9861807539", "sex"=>"-", "address"=>"street 1, city z, state x, india", "customer"=>{"id"=>"637004520", "name"=>"Sudarsan Behera", "age"=>56, "email_id"=>"sudarsan@email.com", "phone_no"=>"9861807539", "sex"=>"-", "address"=>"street 1, city z, state x, india"}}
+Can't verify CSRF token authenticity.
+Completed 422 Unprocessable Entity in 6ms (ActiveRecord: 0.0ms | Allocations: 1134)
+
+
+
+ActiveRecord::RecordInvalid - Validation failed: Sex enter valid sex {male,female or other}:
+  app/controllers/api/v1/customers_controller.rb:32:in `addCustomer'
+
+Started POST "/api/v1/customers/?id=637004520" for 127.0.0.1 at 2022-08-16 15:47:53 +0530
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::V1::CustomersController#addCustomer as */*
+  Parameters: {"id"=>"637004520", "name"=>"Sudarsan Behera", "age"=>56, "email_id"=>"sudarsan@email.com", "phone_no"=>"98618075abv", "sex"=>"male", "address"=>"street 1, city z, state x, india", "customer"=>{"id"=>"637004520", "name"=>"Sudarsan Behera", "age"=>56, "email_id"=>"sudarsan@email.com", "phone_no"=>"98618075abv", "sex"=>"male", "address"=>"street 1, city z, state x, india"}}
+Can't verify CSRF token authenticity.
+Completed 422 Unprocessable Entity in 3ms (ActiveRecord: 0.4ms | Allocations: 4061)
+
+
+
+ActiveRecord::RecordInvalid - Validation failed: Phone no is not a number, Phone no phone_no should be 10 digits long:
+  app/controllers/api/v1/customers_controller.rb:32:in `addCustomer'
+
+Started POST "/api/v1/customers/?id=637004520" for 127.0.0.1 at 2022-08-16 15:48:15 +0530
+Processing by Api::V1::CustomersController#addCustomer as */*
+  Parameters: {"id"=>"637004520", "name"=>"Sudarsan Behera", "age"=>56, "email_id"=>"sudarsan@email.com", "phone_no"=>"0000000001", "sex"=>"male", "address"=>"street 1, city z, state x, india", "customer"=>{"id"=>"637004520", "name"=>"Sudarsan Behera", "age"=>56, "email_id"=>"sudarsan@email.com", "phone_no"=>"0000000001", "sex"=>"male", "address"=>"street 1, city z, state x, india"}}
+Can't verify CSRF token authenticity.
+Completed 422 Unprocessable Entity in 4ms (ActiveRecord: 0.0ms | Allocations: 1102)
+
+
+
+ActiveRecord::RecordInvalid - Validation failed: Phone no phone_no should be 10 digits long:
+  app/controllers/api/v1/customers_controller.rb:32:in `addCustomer'
+
+Started POST "/api/v1/customers/?id=637004520" for 127.0.0.1 at 2022-08-16 15:48:27 +0530
+Processing by Api::V1::CustomersController#addCustomer as */*
+  Parameters: {"id"=>"637004520", "name"=>"Sudarsan Behera", "age"=>56, "email_id"=>"sudarsan@email.com", "phone_no"=>"9861807555539", "sex"=>"male", "address"=>"street 1, city z, state x, india", "customer"=>{"id"=>"637004520", "name"=>"Sudarsan Behera", "age"=>56, "email_id"=>"sudarsan@email.com", "phone_no"=>"9861807555539", "sex"=>"male", "address"=>"street 1, city z, state x, india"}}
+Can't verify CSRF token authenticity.
+Completed 422 Unprocessable Entity in 7ms (ActiveRecord: 0.0ms | Allocations: 1104)
+
+
+
+ActiveRecord::RecordInvalid - Validation failed: Phone no phone_no should be 10 digits long:
+  app/controllers/api/v1/customers_controller.rb:32:in `addCustomer'
+
