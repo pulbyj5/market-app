@@ -12,10 +12,10 @@
 
 ActiveRecord::Schema[7.0].define(version: 2022_08_16_073512) do
   create_table "customers", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.integer "age"
-    t.string "email_id"
-    t.integer "phone_no"
+    t.string "email_id", null: false
+    t.integer "phone_no", null: false
     t.string "sex"
     t.string "address"
     t.datetime "created_at", null: false
@@ -23,12 +23,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_16_073512) do
   end
 
   create_table "products", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "batch"
-    t.string "type"
-    t.string "brand"
-    t.float "price"
-    t.integer "stock"
+    t.string "type", null: false
+    t.string "brand", null: false
+    t.float "price", null: false
+    t.integer "stock", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -47,9 +47,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_16_073512) do
 
   create_table "users", force: :cascade do |t|
     t.string "employee_id"
-    t.string "name"
-    t.string "email_id"
-    t.string "password"
+    t.string "name", null: false
+    t.string "email_id", null: false
+    t.string "password", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
