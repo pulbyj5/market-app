@@ -32,7 +32,7 @@ class Api::V1::ProductsController < ApplicationController
     def addProduct
         p params
         Product.create!(id: params[:id], name: params[:name],batch: params[:batch], p_type: params[:p_type],brand: params[:brand],price: params[:price],stock: params[:stock])
-        render json: {message: "Successfully added"}
+        render json: {status:"ok"}
         # @prod= Product.new(product_params)
         # if @prod.save
         #     render json: {status:"ok", data: @prod}
