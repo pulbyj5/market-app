@@ -3,7 +3,7 @@
 one:
   name: MyString
   batch: MyString
-  type: 
+  p_type: MyString
   brand: MyString
   price: 1.5
   stock: 1
@@ -11,7 +11,7 @@ one:
 two:
   name: MyString
   batch: MyString
-  type: 
+  p_type: MyString
   brand: MyString
   price: 1.5
   stock: 1

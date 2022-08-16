@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
     protect_from_forgery with: :null_session
     before_action :validate_request
-    rescue_from ActiveRecord::ActiveRecordError, with: :active_record_error
+    #rescue_from ActiveRecord::ActiveRecordError, with: :active_record_error
     rescue_from JWT::DecodeError, with: :token_error
 
     private

@@ -12,8 +12,8 @@ class Api::V1::ProductsController < ApplicationController
                 @params[:name] = param[1]
             elsif param[0] == :batch
                 @params[:batch] = param[1]
-            elsif param[0] == :type
-                @params[:type] = param[1]
+            elsif param[0] == :p_type
+                @params[:p_type] = param[1]
             elsif param[0] == :brand
                 @params[:brand] = param[1]
             end
@@ -30,7 +30,8 @@ class Api::V1::ProductsController < ApplicationController
   
 
     def addProduct
-        Product.create!(name: params[:name],batch: params[:batch], type: params[:type],brand: params[:brand],price: params[:price],stock: params[:stock])
+        p params
+        Product.create!(id: params[:id], name: params[:name],batch: params[:batch], p_type: params[:p_type],brand: params[:brand],price: params[:price],stock: params[:stock])
         render json: {message: "Successfully added"}
         # @prod= Product.new(product_params)
         # if @prod.save
@@ -44,9 +45,9 @@ class Api::V1::ProductsController < ApplicationController
         @prod= Product.find(params[:id])
         if @prod
             @prod.destroy
-            render json: {status:"ok", data: @prod}
+            render json: {status:"ok"}
         else
-            render json: {error: "Unable to delete the product"}, status:400
+            render json: {status:"error", error: { message: "Unable to delete the product"}}, status:400
         end
        
     end
@@ -64,7 +65,7 @@ class Api::V1::ProductsController < ApplicationController
     private
 
     def product_params
-        params.require(:product).permit(:name, :batch, :type, :brand, :price, :stock)
+        params.require(:product).permit(:name, :batch, :p_type, :brand, :price, :stock)
     end
 
 end
