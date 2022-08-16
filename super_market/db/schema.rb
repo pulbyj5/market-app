@@ -36,7 +36,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_16_073512) do
   create_table "purchases", force: :cascade do |t|
     t.integer "customer_id", null: false
     t.integer "product_id", null: false
-    t.integer "quantity"
+    t.integer "quantity", null: false
     t.datetime "date_and_time"
     t.string "status"
     t.datetime "created_at", null: false
