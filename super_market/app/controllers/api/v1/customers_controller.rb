@@ -1,5 +1,5 @@
 class Api::V1::CustomersController < ApplicationController
-
+    
     def getCustomers
         @params = {}
         request.query_parameters.symbolize_keys.each do |param| 
