@@ -53,7 +53,7 @@ class Api::V1::ProductsController < ApplicationController
     end
 
     def editProduct
-       @prod= Product.find!(params[:id])
+       @prod= Product.find(params[:id])
        if @prod
         @prod.update!(product_params)
         render json: {status:"ok", data: @prod}
