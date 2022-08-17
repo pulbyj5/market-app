@@ -25,7 +25,17 @@ class Api::V1::CustomersController < ApplicationController
     end
 
     def getPurchasesWithCustomerID
-    
+        @customer = Customer.find(params[:id]);
+        @purchases = []
+        @customer.purchases.to_ary.each do |purchase|
+            id = purchase[:product_id]
+            product = Product.find(id);
+            pk = {id: purchase[:id],customer_id: purchase[:customer_id],product_id: purchase[:product_id],
+            prod_name:product[:name], quantity: purchase[:quantity],
+            status: purchase[:status], date_and_time: purchase[:date_and_time]}
+            @purchases.push pk
+        end
+        render json: {status:"ok", data: @purchases}
     end
 
     def addCustomer
