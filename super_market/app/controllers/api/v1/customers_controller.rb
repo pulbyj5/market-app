@@ -43,7 +43,7 @@ class Api::V1::CustomersController < ApplicationController
 
     def editCustomer
         @customer = Customer.find_by!(id: params[:id])
-        
+        p @customer
         @update_data = {}
         params[:data].to_unsafe_h.symbolize_keys.each do |param|
             case param[0] 
