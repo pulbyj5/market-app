@@ -4,7 +4,7 @@ class Api::V1::UsersController < ApplicationController
         @data_to_send = {
             id: @authenticated_user.id,
             employee_id: @authenticated_user.employee_id,
-            name: @authenticated_user.employee_id,
+            name: @authenticated_user.name,
             email_id: @authenticated_user.email_id
         }
         render json: {status:"ok", data:@data_to_send}
@@ -30,7 +30,7 @@ class Api::V1::UsersController < ApplicationController
     def editUser
         @authenticated_user = User.find(params[:authenticated_user_id])
         @update_data = {}
-        if @authenticated_user && @authenticated_user.employee_id == params[:employee_id]
+        if @authenticated_user
             params[:data].to_unsafe_h.symbolize_keys.each do |param|
                 case param[0]
                     when :employee_id  

@@ -39,7 +39,7 @@ const Authenticated = ()=>{
           <button type="button" className="btn btn-outline-primary me-2" 
               onClick={()=>{logout(navigate)}}
               >Logout</button>
-          <Link to="/purchases" className="btn btn-outline-primary me-2">Employee Details</Link>
+          <Link to="/user" className="btn btn-outline-primary me-2">Employee Details</Link>
         </div>
       </div>
     </div>
