@@ -1,14 +1,10 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router";
 import auth from '../../apis/auth';
+import {saveToken} from '../../apis/token'
 
 const fakeLogin = ()=>{
-        localStorage.setItem(
-                'auth',
-                JSON.stringify({
-                    token: "fake token"
-                })
-        )
+        saveToken("fake token");
 }
 
 const onLogin = async (e, inp,navigate) => {
@@ -16,12 +12,7 @@ const onLogin = async (e, inp,navigate) => {
         let {employee_id,password} = inp;
         const response = await auth.post('/login',{employee_id,password});
         if(response.data.status === "ok"){
-                localStorage.setItem(
-                        'auth',
-                        JSON.stringify({
-                            token: response.data.data.token
-                        })
-                )
+                saveToken(response.data.data.token);
                 navigate("/",{ replace: true });
         }
         else{
@@ -32,7 +23,7 @@ const Login = (props)=>{
         let navigate = useNavigate();
 
         let [inp, setInp] = useState({employee_id:"",password:""});
-        return (<div>
+        return (<div className="middle">
                         <h1 className='svl'>Login</h1>
 
                         <form onSubmit={(e)=>{onLogin(e,inp,navigate)}}>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import {removeToken} from "../apis/token"
 
 
 
@@ -16,7 +17,7 @@ const Header= ()=>{
 
 
 const logout = (navigate) =>{
-    localStorage.clear();
+    removeToken();
     navigate("/login",{ replace: true });
 }
 

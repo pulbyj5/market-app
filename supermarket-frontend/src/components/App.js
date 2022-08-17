@@ -13,13 +13,10 @@ import purchases from './purchases';
 import Auth from './auth';
 import customerPurchases from './customers/purchases';
 
+import {getToken} from "../apis/token"
 
-const getToken = ()=>{
-  const auth= JSON.parse(localStorage.getItem('auth'));
-  const token = auth?auth.token:null;
-  console.log(auth);
-  return token;
-}
+
+
 
 let location, navigate;
 const AppRoutes = ()=>{

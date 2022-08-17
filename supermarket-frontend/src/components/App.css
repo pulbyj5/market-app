@@ -1,7 +1,11 @@
-.main{
+.middle{
     margin: 100px 200px !important;
 }
 
+.main{
+    margin-left: 100px !important;
+    margin-right: 100px !important;
+}
 .sv{
     margin-top: 10px !important;
     margin-bottom: 10px !important;
