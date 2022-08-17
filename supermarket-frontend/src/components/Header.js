@@ -1,7 +1,29 @@
 import React from 'react'
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+
+
+
+const Header= ()=>{
+  const location = useLocation();
+  if(location.pathname === "/login"){
+      return (<NotAuthenticated/>);
+  }
+  else{
+      return (<Authenticated/>);
+  }
+}
+
+
+
+const logout = (navigate) =>{
+    localStorage.clear();
+    navigate("/login",{ replace: true });
+}
 
 const Authenticated = ()=>{
+
+  const navigate = useNavigate();
+
   return (
     <div className="container">
       <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
@@ -13,7 +35,9 @@ const Authenticated = ()=>{
         </ul>
 
         <div className="col-md-3 text-end">
-          <button type="button" className="btn btn-outline-primary me-2">Logout</button>
+          <button type="button" className="btn btn-outline-primary me-2" 
+              onClick={()=>{logout(navigate)}}
+              >Logout</button>
           <Link to="/purchases" className="btn btn-outline-primary me-2">Employee Details</Link>
         </div>
       </div>
@@ -23,15 +47,6 @@ const Authenticated = ()=>{
 
 const NotAuthenticated = ()=>{
   return (<div></div>);
-}
-const Header= ()=>{
-      const location = useLocation();
-      if(location.pathname === "/login"){
-          return (<NotAuthenticated/>);
-      }
-      else{
-          return (<Authenticated/>);
-      }
 }
 
 export default Header;

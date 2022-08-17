@@ -17,18 +17,20 @@ import customerPurchases from './customers/purchases';
 const getToken = ()=>{
   const auth= JSON.parse(localStorage.getItem('auth'));
   const token = auth?auth.token:null;
+  console.log(auth);
   return token;
 }
 
+let location, navigate;
 const AppRoutes = ()=>{
 
-      let location = useLocation();
-      let navigate = useNavigate();
+      location = useLocation();
+      navigate = useNavigate();
 
-      let {auth, setAuth} = useState({status:"not_fetched"});
+      let [auth, setAuth] = useState({status:"not_fetched"});
 
       useEffect(()=>{
-          if(auth && auth.status === "not_fetched"){
+          if(auth.status === "not_fetched"){
               const token = getToken();
               if(token){
                   setAuth({status:"available", token: token});
@@ -36,9 +38,9 @@ const AppRoutes = ()=>{
                   setAuth({status:"unavailable", token: token});
               }
           }
-          else if (auth && auth.status === "available"){
+          else if (auth.status === "available"){
               if(location.pathname === "/login");
-              navigate("/customers",{ replace: true });
+              navigate("/",{ replace: true });
           }
           else{
               if(location.pathname !== "/login");
