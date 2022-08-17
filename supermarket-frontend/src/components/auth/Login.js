@@ -33,10 +33,10 @@ const Login = (props)=>{
 
         let [inp, setInp] = useState({employee_id:"",password:""});
         return (<div>
-                        <h1>Login</h1>
+                        <h1 className='svl'>Login</h1>
 
                         <form onSubmit={(e)=>{onLogin(e,inp,navigate)}}>
-                                <div className="row mb-3">
+                                <div className="row mb-3 sv">
                                         <label htmlFor="inputID" className="col-sm-2 col-form-label">Employee ID</label>
                                         <div className="col-sm-10">
                                         <input type="string" className="form-control" id="inputID"
@@ -45,7 +45,7 @@ const Login = (props)=>{
                                         />
                                         </div>
                                 </div>
-                                <div className="row mb-3">
+                                <div className="row mb-3 sv">
                                         <label htmlFor="inputPassword" className="col-sm-2 col-form-label">Password</label>
                                         <div className="col-sm-10">
                                         <input type="password" className="form-control" id="inputPassword"
@@ -53,8 +53,8 @@ const Login = (props)=>{
                                         onChange = {(e)=> setInp({...inp,password: e.target.value})}/>
                                         </div>
                                 </div>
-                                <button type="submit" className="btn btn-primary">Login</button>
-                                <button type="button" className="btn btn-outline-primary me-2" 
+                                <button type="submit" className="btn btn-primary sv sh">Login</button>
+                                <button type="button" className="btn btn-outline-primary me-2 sv sh" 
                                         onClick={()=>{
                                                 fakeLogin();
                                                 navigate("/",{ replace: true });

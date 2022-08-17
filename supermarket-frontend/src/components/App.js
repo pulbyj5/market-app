@@ -50,7 +50,7 @@ const AppRoutes = ()=>{
       console.log(location);
       
     return(
-    <><Header/>
+    <div className="main">
       <Routes>
         <Route path='/' exact element={<Home/>}/>
         <Route path='/customers' exact element={<customers.Get/>}/>
@@ -72,16 +72,17 @@ const AppRoutes = ()=>{
         <Route path='/user/delete/' exact element={<user.Delete/>}/>
         <Route path='/login' exact element={<Auth.Login/>}/>
 
-    </Routes></>
+    </Routes></div>
     );
 }
 
 const App = ()=>{
 
         return(
-            <div  className="container">
+            <div>
                 <BrowserRouter>
-                    <AppRoutes/>
+                  <Header/>
+                  <AppRoutes/>
                 </BrowserRouter>
             </div>
         )
