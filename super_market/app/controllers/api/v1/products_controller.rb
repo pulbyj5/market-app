@@ -44,7 +44,7 @@ class Api::V1::ProductsController < ApplicationController
     def deleteProduct
         @prod= Product.find(params[:id])
         if @prod
-            @prod.destroy
+            @prod.destroy!
             render json: {status:"ok"}
         else
             render json: {status:"error", error: { message: "Unable to delete the product"}}, status:400
@@ -53,9 +53,9 @@ class Api::V1::ProductsController < ApplicationController
     end
 
     def editProduct
-       @prod= Product.find(params[:id])
+       @prod= Product.find!(params[:id])
        if @prod
-        @prod.update(product_params)
+        @prod.update!(product_params)
         render json: {status:"ok", data: @prod}
        else
         render json: {error: "Unable to update the product"},status:400

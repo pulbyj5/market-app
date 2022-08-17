@@ -63,11 +63,11 @@ class Api::V1::CustomersController < ApplicationController
                     @update_data[:address] = param[1]
                 else
             end
-            p @update_data
-            if @update_data.length > 0
-                @customer.update!(@update_data)
-            end
-            render json: {status:"ok"}
         end
+        p @update_data
+        if @update_data.length > 0
+            @customer.update!(@update_data)
+        end
+        render json: {status:"ok"}
     end
 end

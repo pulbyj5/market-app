@@ -9,7 +9,7 @@ class Product < ApplicationRecord
     validates :p_type, format: { with: /\A[a-z _.,A-Z0-9]+\z/, message:"Enter a valid type"}, presence: true,length: { minimum: 2, maximum: 40 ,message: "Type must be 2 to 40 characters long"}
     validates :brand, format: { with: /\A[a-z _.,A-Z]+\z/, message:"Enter a valid brand"}, presence: true,length: { minimum: 2, maximum: 40 ,message: "brand must be 2 to 40 characters long"}
     validates :price,presence:true, numericality: {only_float: true}
-    validates :stock, numericality: true, inclusion: {in: 0..999999999999,message: "stock should be 1 to 12 digits long"}, presence: true
+    validates :stock, numericality: true, inclusion: {in: 0..999999999999,message: "stock >= 0 & <=999999999999"}, presence: true
     validates :id, numericality: true, inclusion: {in: 100..999999999999,message: "id should be 3 to 12 digits long"}, presence: true
 
 end

@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
     protect_from_forgery with: :null_session
     before_action :validate_request
-    #rescue_from ActiveRecord::ActiveRecordError, with: :active_record_error
+    rescue_from ActiveRecord::ActiveRecordError, with: :active_record_error
     rescue_from JWT::DecodeError, with: :token_error
 
     private
@@ -48,9 +48,9 @@ class ApplicationController < ActionController::Base
     # ERRORS
     def active_record_error(_e)
         if _e.is_a?ActiveRecord::RecordNotFound
-            render json: {status: "error",error: {message: "Corrosponding record does not exist!",type: "DB error"}}, status: :not_found
+            render json: {status: "error",error: {message: "Corresponding record does not exist!",type: "DB error"}}, status: :not_found
         elsif  _e.is_a?ActiveRecord::RecordNotUnique
-            render json: {status: "error",error: {message: "Corrosponding ID already exist!", type: "DB error"}}, status: :conflict
+            render json: {status: "error",error: {message: "Corresponding ID already exist!", type: "DB error"}}, status: :conflict
 
         else
             render json: {status: "error", error: {message: _e.message, type: "DB error"}}, status: :not_acceptable
