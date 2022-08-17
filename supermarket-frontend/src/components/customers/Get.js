@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const getCustomers = async (setCustomers)=>{
     let token = getToken();
-    console.log(token);
+    //console.log(token);
     const response = await customers.get('/',{
         headers:{
             'Authorization' : `Bearer ${token}`
