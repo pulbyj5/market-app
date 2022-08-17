@@ -15,12 +15,31 @@ const getCustomers = async (setCustomers)=>{
     setCustomers(response.data.data);
 }
 
+const getCustomersWithFilters = async (e,setCustomers, filters) => {
+    Object.keys(filters).forEach((key)=>{
+        if(!filters[key]){
+            delete filters[key]
+        }
+    });
+    console.log(filters);
+    let token = getToken();
+    const response = await customers.get('/',{
+        headers:{
+            'Authorization' : `Bearer ${token}`
+        },
+        params: filters
+    });
+    console.log(response);
+    setCustomers(response.data.data);
+}
+
+
 const renderRecords = (customers)=>{
 
     return customers.map((customer)=>{
         console.log(customer);
         return(
-            <tr>
+            <tr key={customer.id}>
                     <td>{customer.id}</td>
                     <td>{customer.name}</td>
                     <td>{customer.age}</td>
@@ -39,6 +58,8 @@ const renderRecords = (customers)=>{
 const Get = (props) => {
     const [customers, setCustomers] = useState([]);
 
+    const [filters, setFilters] = useState({id:"",name:"",age:"",email_id:"",phone_no:"",sex:""});
+
     let navigate = useNavigate();
 
     useEffect(()=>{
@@ -54,7 +75,40 @@ const Get = (props) => {
             onClick={(e)=>{navigate("./create",{ replace: true })}}>
                 Add a new Customer</button>
         </div>
-
+            <div className="row sv">
+                <div className="col">
+                <input type="text" className="form-control" placeholder="ID"
+                value = {filters.id}
+                onChange = {(e)=> setFilters({...filters,id: parseInt(e.target.value)?parseInt(e.target.value):null})}/>
+                </div>
+                <div className="col">
+                <input type="text" className="form-control" placeholder="Name"
+                value = {filters.name}
+                onChange = {(e)=> setFilters({...filters,name: e.target.value})}/>
+                </div>
+            </div>
+            <div className="row sv">
+                <div className="col">
+                <input type="text" className="form-control" placeholder="Email ID"
+                value = {filters.email_id}
+                onChange = {(e)=> setFilters({...filters,email_id: e.target.value})}/>
+                </div>
+                <div className="col">
+                <input type="text" className="form-control" placeholder="Phone NO"
+                value = {filters.phone_no}
+                onChange = {(e)=> setFilters({...filters,phone_no: parseInt(e.target.value)?parseInt(e.target.value):null})}/>
+                </div>
+                <div className="col">
+                <input type="text" className="form-control" placeholder="Sex"
+                value = {filters.sex}
+                onChange = {(e)=> setFilters({...filters,sex: e.target.value})}/>
+                </div>
+            </div>
+            <button className="btn btn-primary sv sh"
+            onClick={(e)=>{getCustomersWithFilters(e,setCustomers,filters)}}
+            >Filter</button>
+            <button className="btn btn-primary sv sh" onClick={()=>{setFilters({id:"",name:"",age:"",email_id:"",phone_no:"",sex:""})}}>Clear</button>
+        
         <table className="table">
             <thead>
                 <tr>
@@ -72,7 +126,7 @@ const Get = (props) => {
             </thead>
             <tbody>
             {renderRecords(customers)}
-                
+            {console.log(filters)}
             </tbody>
         </table>
 
