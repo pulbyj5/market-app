@@ -47,7 +47,7 @@ const renderRecords = (customers)=>{
                     <td>{customer.phone_no}</td>
                     <td>{customer.sex}</td>
                     <td>{customer.address}</td>
-                    <td><Link to={`/customers/${customer.id}/purchases`}>Orders</Link></td>
+                    <td><Link to={`/customers/${customer.id}/purchases`}>Purchases</Link></td>
                     <td><Link to={`/customers/edit/${customer.id}`}>Edit</Link></td>
                     <td><Link to={`/customers/delete/${customer.id}`}>Delete</Link></td>
             </tr>
@@ -119,7 +119,7 @@ const Get = (props) => {
                     <th scope="col">Phone NO</th>
                     <th scope="col">Sex</th>
                     <th scope="col">Address</th>
-                    <th scope="col">#Orders</th>
+                    <th scope="col">#Purchases</th>
                     <th scope="col">#Edit</th>
                     <th scope="col">#Delete</th>
                 </tr>

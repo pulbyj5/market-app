@@ -3,9 +3,6 @@ import { useParams,useNavigate } from "react-router";
 import customers from '../../apis/customers';
 import { getToken } from '../../apis/token';
 
-const goBack= (navigate) => {
-        navigate("/customers/",{ replace: true });
-}
 
 const deleteCustomer = async (id,navigate)=>{
         let token = getToken();
@@ -32,7 +29,7 @@ const Delete = (props)=>{
                 <button type="submit" className="btn btn-danger svxl sh"
                 onClick = {(e)=>{deleteCustomer(id,navigate)}}>Yes</button>
                 <button type="button" className="btn btn-secondary me-2 svxl sh"
-                onClick = {(e)=>{goBack(navigate)}}>
+                onClick = {(e)=>{navigate(-1)}}>
                         No
                 </button>
         </div>
