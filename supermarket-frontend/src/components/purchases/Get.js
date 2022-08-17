@@ -27,7 +27,6 @@ const renderRecords = (purchases)=>{
                     <td>{purchase.quantity}</td>
                     <td>{purchase.date_time}</td>
                     <td>{purchase.status}</td>
-                    <td><Link to={`/purchases/${purchase.id}/purchases`}>Orders</Link></td>
                     <td><Link to={`/purchases/edit/${purchase.id}`}>Edit</Link></td>
                     <td><Link to={`/purchases/delete/${purchase.id}`}>Delete</Link></td>
             </tr>
@@ -63,7 +62,6 @@ const Get = (props) => {
                     <th scope="col">Quantity</th>
                     <th scope="col">Date and Time</th>
                     <th scope="col">Status</th>
-                    <th scope="col">#Orders</th>
                     <th scope="col">#Edit</th>
                     <th scope="col">#Delete</th>
                 </tr>
