@@ -42,7 +42,7 @@ const Edit = (props)=>{
             },[]);
 
         return (<div>
-        <h2>{"Edit Customer"}</h2>
+        <h2  className='svxl'>{"Edit Customer"}</h2>
 
         <form onSubmit={(e)=>handleSubmit(e,customerDetails,navigate)}>
             <div className="row mb-3">

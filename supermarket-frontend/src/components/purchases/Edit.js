@@ -41,7 +41,7 @@ const Edit = (props)=>{
             fetchItem(id_old,setPurchaseDetails)
         },[]);
         return (<div>
-        <h2>{"Edit Purchase"}</h2>
+        <h2 className='svxl'>{"Edit Purchase"}</h2>
 
         <form onSubmit={(e)=>handleSubmit(e,id_old,purchaseDetails,navigate)}>
             {console.log(purchaseDetails)}

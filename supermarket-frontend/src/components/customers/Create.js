@@ -27,7 +27,7 @@ const Create = (props)=>{
         email_id:"",phone_no:"",sex:"",address:""});
 
         return (<div>
-        <h2>{"Add Customer"}</h2>
+        <h2  className='svxl'>{"Add Customer"}</h2>
 
         <form onSubmit={(e)=>handleSubmit(e,customerDetails,navigate)}>
             <div className="row mb-3">
