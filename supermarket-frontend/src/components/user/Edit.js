@@ -13,8 +13,8 @@ const fetchUser = async (setUserData)=>{
                 setUserData({...response.data.data,password:""});
         }
         else{
-                console.log(response.data.error);
-        } 
+            alert(response.data.error.message);
+        }
 }
 
 const handleSubmit = async (e,userDetails,navigate)=>{

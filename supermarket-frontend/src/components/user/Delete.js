@@ -19,6 +19,9 @@ const handleSubmit = async (e,userDetails,navigate)=>{
         removeToken();
         navigate("/login",{ replace: true })
     }
+    else{
+        alert(response.data.error.message);
+    }
 };
 const Delete = (props)=>{
         let navigate = useNavigate();

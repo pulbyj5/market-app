@@ -24,10 +24,10 @@ const Login = (props)=>{
 
         let [inp, setInp] = useState({employee_id:"",password:""});
         return (<div className="middle">
-                        <h1 className='svl'>Login</h1>
+                        <h1 className='svxl'>Login</h1>
 
                         <form onSubmit={(e)=>{onLogin(e,inp,navigate)}}>
-                                <div className="row mb-3 sv">
+                                <div className="row mb-3 svl">
                                         <label htmlFor="inputID" className="col-sm-2 col-form-label">Employee ID</label>
                                         <div className="col-sm-10">
                                         <input type="string" className="form-control" id="inputID"
@@ -36,7 +36,7 @@ const Login = (props)=>{
                                         />
                                         </div>
                                 </div>
-                                <div className="row mb-3 sv">
+                                <div className="row mb-3 svl">
                                         <label htmlFor="inputPassword" className="col-sm-2 col-form-label">Password</label>
                                         <div className="col-sm-10">
                                         <input type="password" className="form-control" id="inputPassword"
@@ -45,12 +45,12 @@ const Login = (props)=>{
                                         </div>
                                 </div>
                                 <button type="submit" className="btn btn-primary sv sh">Login</button>
-                                <button type="button" className="btn btn-outline-primary me-2 sv sh" 
+                                {/*<button type="button" className="btn btn-outline-primary me-2 sv sh" 
                                         onClick={()=>{
                                                 fakeLogin();
                                                 navigate("/",{ replace: true });
                                         }}>Fake Login
-                                </button>
+                                </button>*/}
                                 </form>
                 </div>)
 }

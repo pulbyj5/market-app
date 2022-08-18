@@ -19,6 +19,9 @@ const handleSubmit = async (e,purchaseDetails,customer_id,navigate)=>{
     if(response.data.status === "ok"){
         navigate(`/customers/${customer_id}/purchases`,{ replace: true })
     }
+    else{
+        alert(response.data.error.message);
+    }
 };
 
 const getProductsWithFilters = async (e,setProducts, filters) => {

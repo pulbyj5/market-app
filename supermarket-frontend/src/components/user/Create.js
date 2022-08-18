@@ -15,7 +15,10 @@ const handleSubmit = async (e,userDetails,navigate)=>{
     });
     console.log(response);
     if(response.data.status === "ok"){
-        navigate("/user/",{ replace: true })
+        navigate(-1);
+    }
+    else{
+        alert(response.data.error.message);
     }
 };
 const Create = (props)=>{

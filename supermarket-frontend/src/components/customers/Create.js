@@ -17,6 +17,9 @@ const handleSubmit = async (e,customerDetails,navigate)=>{
     if(response.data.status === "ok"){
         navigate("/customers/",{ replace: true })
     }
+    else{
+        alert(response.data.error.message);
+    }
 };
 const Create = (props)=>{
         let navigate = useNavigate();

@@ -11,6 +11,8 @@ class Api::V1::PurchasesController < ApplicationController
                 @params[:product_id] = param[1]
             elsif param[0] == :quantity
                 @params[:quantity] = param[1]
+            elsif param[0] == :status
+                @params[:status] = param[1]
             end
         end
 
@@ -69,16 +71,26 @@ class Api::V1::PurchasesController < ApplicationController
                     @prod.update!(stock: @prod[:stock]+@purchase[:quantity])
                     @purchase.update!(@update_data)
                 end
+                render json: {status:"ok"}
             elsif @update_data[:quantity]
-                ActiveRecord::Base.transaction do
-                    @prod.update!(stock: @prod[:stock]+@purchase[:quantity]-@update_data[:quantity])
-                    @purchase.update!(@update_data)
+                if @prod[:stock]+@purchase[:quantity]-@update_data[:quantity] > 0
+                    ActiveRecord::Base.transaction do
+                        @prod.update!(stock: @prod[:stock]+@purchase[:quantity]-@update_data[:quantity])
+                        @purchase.update!(@update_data)
+                    end
+                    render json: {status:"ok"}
+                else
+                    render json: {status:"error",error:{message:"stock is not enough for this update"}}
                 end
+                
             else
                 @purchase.update!(@update_data)
+                render json: {status:"ok"}
             end
-            render json: {status:"ok"}
+        else
+            render json: {status:"error",error:{message:"invalid update data"}}
         end
+            
     end
 
 end

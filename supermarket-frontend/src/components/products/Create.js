@@ -17,6 +17,9 @@ const handleSubmit = async (e,productDetails,navigate)=>{
     if(response.data.status === "ok"){
         navigate("/products/",{ replace: true })
     }
+    else{
+        alert(response.data.error.message);
+    }
 };
 const Create = (props)=>{
         let navigate = useNavigate();

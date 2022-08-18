@@ -12,10 +12,10 @@ const deleteCustomer = async (id,navigate)=>{
                 headers:{ 'Authorization' : `Bearer ${token}`}
         });
         if(response.data.status === "ok"){
-                navigate("/customers/",{ replace: true });
-        }
+                navigate(-1);
+            }
         else{
-                console.log(response.data.error.message);
+                alert(response.data.error.message);
         }
 }
 const Delete = (props)=>{

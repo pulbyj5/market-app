@@ -24,7 +24,10 @@ const handleSubmit = async (e,productDetails,navigate)=>{
     });
     console.log(response);
     if(response.data.status === "ok"){
-        navigate("/products/",{ replace: true })
+        navigate(-1)
+    }
+    else{
+        alert(response.data.error.message);
     }
 };
 let id_old;

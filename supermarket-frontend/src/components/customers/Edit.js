@@ -24,7 +24,10 @@ const handleSubmit = async (e,customerDetails,navigate)=>{
     });
     console.log(response);
     if(response.data.status === "ok"){
-        navigate("/customers/",{ replace: true })
+        navigate(-1);
+    }
+    else{
+        alert(response.data.error.message);
     }
 };
 let id_old;

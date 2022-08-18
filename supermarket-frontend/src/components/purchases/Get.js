@@ -1,7 +1,7 @@
 import React,{useEffect, useState} from 'react'
 import purchases from '../../apis/purchases';
 import { getToken } from '../../apis/token';
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 const getPurchases = async (setPurchases)=>{
@@ -44,7 +44,7 @@ const renderRecords = (purchases)=>{
                     <td>{purchase.customer_id}</td>
                     <td>{purchase.product_id}</td>
                     <td>{purchase.quantity}</td>
-                    <td>{purchase.date_time}</td>
+                    <td>{purchase.date_and_time}</td>
                     <td>{purchase.status}</td>
                     <td><Link to={`/purchases/edit/${purchase.id}`}>Edit</Link></td>
                     <td><Link to={`/purchases/delete/${purchase.id}`}>Delete</Link></td>
@@ -56,9 +56,8 @@ const renderRecords = (purchases)=>{
 const Get = (props) => {
     const [purchases, setPurchases] = useState([]);
 
-    const [filters, setFilters] = useState({id:"",customer_id:"",product_id:"",quantity:"",date_time:"",status:""});
+    const [filters, setFilters] = useState({id:"",customer_id:"",product_id:"",quantity:"",status:""});
 
-    let navigate = useNavigate();
 
     useEffect(()=>{
         getPurchases(setPurchases);
@@ -67,12 +66,6 @@ const Get = (props) => {
     return (
          
         <div>
-        
-        <div className="d-flex justify-content-center py-3">
-            <button type="button" className="btn btn-primary" 
-            onClick={(e)=>{navigate("/",{ replace: true })}}>
-                Add a new Purchase</button>
-        </div>
             <div className="row sv">
                 <div className="col">
                 <input type="text" className="form-control" placeholder="ID"
@@ -98,11 +91,6 @@ const Get = (props) => {
                 </div>
                 <div> 
                     <p></p>   
-                    <div className="col">
-                    <input type="text" className="form-control" placeholder="Date and Time"
-                    value = {filters.date_time}
-                    onChange = {(e)=> setFilters({...filters,date_time: e.target.value})}/>
-                    </div>  
                     <p></p>
                   <div className="col">
                     <input type="text" className="form-control" placeholder="status"
@@ -115,7 +103,7 @@ const Get = (props) => {
             <button className="btn btn-primary sv sh"
             onClick={(e)=>{getPurchasesWithFilters(e,setPurchases,filters)}}
             >Filter</button>
-            <button className="btn btn-primary sv sh" onClick={()=>{setFilters({id:"",customer_id:"",product_id:"",quantity:"",date_time:"",status:""})}}>Clear</button>
+            <button className="btn btn-primary sv sh" onClick={()=>{setFilters({id:"",customer_id:"",product_id:"",quantity:"",status:""})}}>Clear</button>
         
         <table className="table">
             <thead>
