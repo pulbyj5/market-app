@@ -16,7 +16,7 @@ const onLogin = async (e, inp,navigate) => {
                 navigate("/",{ replace: true });
         }
         else{
-                console.log(response.data.error.message);
+                alert(response.data.error.message);
         }
 };
 const Login = (props)=>{
