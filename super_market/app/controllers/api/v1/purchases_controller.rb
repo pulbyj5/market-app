@@ -43,8 +43,13 @@ class Api::V1::PurchasesController < ApplicationController
     end
 
     def deletePurchase
-        @purchase = Purchase.find_by!(id: params[:id])
-        @purchase.destroy!
+        ActiveRecord::Base.transaction do
+            @purchase = Purchase.find_by!(id: params[:id])
+            @prod = @purchase.product
+            @prod.update!(stock: @prod[:stock]+@purchase[:quantity])
+            @purchase.destroy!
+        end
+        
         render json: {status:"ok"}
     end
 

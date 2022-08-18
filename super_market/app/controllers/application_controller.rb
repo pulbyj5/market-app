@@ -47,23 +47,25 @@ class ApplicationController < ActionController::Base
 
     # ERRORS
     def active_record_error(_e)
+        p _e
         if _e.is_a?ActiveRecord::RecordNotFound
-            render json: {status: "error",error: {message: "Corresponding record does not exist!",type: "DB error"}}, status: :not_found
+            render json: {status: "error",error: {message: "Corresponding record does not exist!",type: "DB error"}}
         elsif  _e.is_a?ActiveRecord::RecordNotUnique
-            render json: {status: "error",error: {message: "Corresponding ID already exist!", type: "DB error"}}, status: :conflict
-
+            render json: {status: "error",error: {message: "Corresponding ID already exist!", type: "DB error"}}
+        elsif  _e.is_a?ActiveRecord::InvalidForeignKey
+            render json: {status: "error",error: {message: "Dependency issues: Some records might depend on this record", type: "DB error"}}
         else
-            render json: {status: "error", error: {message: _e.message, type: "DB error"}}, status: :not_acceptable
+            render json: {status: "error", error: {message: _e.message, type: "DB error"}}
         end
     end
 
     def token_error(_e)
         if _e.is_a?JWT::ExpiredSignature
-            render json: {status: "error",error: {message: "Token expired!",type: "token error"}}, status: :unauthorized
+            render json: {status: "error",error: {message: "Token expired!",type: "token error"}}
         elsif _e.is_a?JWT::VerificationError
-            render json: {status: "error",error: {message: "Invalid token!",type: "token error"}}, status: :unauthorized
+            render json: {status: "error",error: {message: "Invalid token!",type: "token error"}}
         else
-            render json: {status: "error", error: {message: _e.message, type: "token error"}}, status: :unauthorized
+            render json: {status: "error", error: {message: _e.message, type: "token error"}}
         end
     end
 end
