@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
         elsif  _e.is_a?ActiveRecord::RecordNotUnique
             render json: {status: "error",error: {message: "Corresponding ID already exist!", type: "DB error"}}
         elsif  _e.is_a?ActiveRecord::InvalidForeignKey
-            render json: {status: "error",error: {message: "Dependency issues: Some records might depend on this record", type: "DB error"}}
+            render json: {status: "error",error: {message: "Dependency issues: Some records depend on this record", type: "DB error"}}
         else
             render json: {status: "error", error: {message: _e.message, type: "DB error"}}
         end

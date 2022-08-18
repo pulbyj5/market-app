@@ -97,7 +97,7 @@ const Get = (props) => {
                 <div className="col">
                 <input type="text" className="form-control" placeholder="Brand"
                 value = {filters.brand}
-                onChange = {(e)=> setFilters({...filters,brand: parseInt(e.target.value)?parseInt(e.target.value):null})}/>
+                onChange = {(e)=> setFilters({...filters,brand: e.target.value})}/>
                 </div>
                 <div className="col">
                 <input type="text" className="form-control" placeholder="batch"
