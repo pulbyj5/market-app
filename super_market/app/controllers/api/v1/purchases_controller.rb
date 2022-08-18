@@ -46,7 +46,9 @@ class Api::V1::PurchasesController < ApplicationController
         ActiveRecord::Base.transaction do
             @purchase = Purchase.find_by!(id: params[:id])
             @prod = @purchase.product
-            @prod.update!(stock: @prod[:stock]+@purchase[:quantity])
+            if(@purchase[:status] == "success")
+                @prod.update!(stock: @prod[:stock]+@purchase[:quantity])
+            end
             @purchase.destroy!
         end
         
@@ -59,8 +61,6 @@ class Api::V1::PurchasesController < ApplicationController
         @update_data = {}
         params[:data].to_unsafe_h.symbolize_keys.each do |param|
             case param[0] 
-                when :customer_id 
-                  @update_data[:customer_id] = param[1]
                 when :quantity
                   @update_data[:quantity] = param[1]
                 when :date_and_time
